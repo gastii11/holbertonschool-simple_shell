@@ -22,10 +22,12 @@ int main(void)
 			break;
 		line[strcspn(line, "\n")] = 0;
 
+
 		args = malloc(10 * sizeof(char *));
 		if (!args)
 			exit(EXIT_FAILURE);
 		
+		i = 0;
 		token = strtok(line, " ");
 		while (token && i < 9)
 		{
