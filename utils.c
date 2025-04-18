@@ -6,7 +6,7 @@
  */
 void print_prompt(void)
 {
-    printf("$ ");
+	printf("$ ");
 }
 
 /**
@@ -15,7 +15,7 @@ void print_prompt(void)
  */
 void clean_newline(char *str)
 {
-    str[strcspn(str, "\n")] = '\0';
+	str[strcspn(str, "\n")] = '\0';
 }
 
 /**
@@ -23,7 +23,7 @@ void clean_newline(char *str)
  */
 void exit_shell(void)
 {
-    printf("\nExiting shell...\n");
-    exit(EXIT_SUCCESS);
+	printf("\nExiting shell...\n");
+	exit(EXIT_SUCCESS);
 }
 

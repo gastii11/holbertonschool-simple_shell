@@ -26,7 +26,7 @@ int main(void)
 		args = malloc(10 * sizeof(char *));
 		if (!args)
 			exit(EXIT_FAILURE);
-		
+
 		i = 0;
 		token = strtok(line, " ");
 		while (token && i < 9)
