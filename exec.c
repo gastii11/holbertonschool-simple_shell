@@ -9,6 +9,7 @@
 void execute_command(char *command, char *args[])
 {
 	pid_t pid;
+	int status;
 
 	pid = fork();
 
@@ -16,20 +17,17 @@ void execute_command(char *command, char *args[])
 	{
 		if (execve(command, args, environ) == -1)
 		{
-			perror("Error al ejecutar el comando");
+			perror("./shell");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else if (pid > 0)
 	{
-		wait(NULL);
+		wait(&status);
 	}
 	else
 	{
 		perror("fork failed");
 		exit(EXIT_FAILURE);
 	}
-
-
 }
-

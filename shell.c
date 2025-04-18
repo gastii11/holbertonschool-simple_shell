@@ -10,9 +10,11 @@
 int main(void)
 {
 	char *line = NULL;
-	char *args[] = {NULL};
+	char **args;
 	size_t len = 0;
 	ssize_t nread;
+	int i = 0;
+	char *token;
 
 	while (1)
 	{
@@ -23,11 +25,32 @@ int main(void)
 
 		line[strcspn(line, "\n")] = 0;
 
-		if (line[0] != '\0')
+		args = malloc(sizeof(char *));
+		if (!args)
 		{
-			args[0] = line;
-			execute_command(line, args);
+			perror("malloc failed");
+			exit(EXIT_FAILURE);
 		}
+
+		token = strtok(line, " ");
+		i = 0;
+		while (token)
+		{
+			args = realloc(args, (i + 1) * sizeof(char *));
+			if (!args)
+			{
+				perror("realloc failed");
+				exit(EXIT_FAILURE);
+			}
+			args[i++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[i] = NULL;
+
+		if (args[0])
+			execute_command(args[0], args);
+
+		free(args);
 	}
 	free(line);
 	return (0);
