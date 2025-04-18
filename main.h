@@ -9,7 +9,7 @@
 
 extern char **environ;
 
-void execute_command(char *command);
+void execute_command(char *command, char *args[]);
 void print_prompt(void);
 void clean_newline(char *str);
 void exit_shell(void);

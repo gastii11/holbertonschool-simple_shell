@@ -6,29 +6,20 @@
  *
  * Return: Void.
  */
-void execute_command(char *command)
+void execute_command(char *command, char *args[])
 {
-    pid_t pid = fork();
-    char **args;
+    pid_t pid;
 
-    args = malloc(2 * sizeof(char *));
-    if (args == NULL)
-    {
-        perror("malloc failed");
-        exit(EXIT_FAILURE);
-    }
-
-    args[0] = command;
-    args[1] = NULL;
-
+    
     pid = fork();
 
     if (pid == 0)
     {
-	execve(args[0], args, environ);
-        perror("Error");
-        free(args);
-        exit(EXIT_FAILURE);
+	    if (execve(command, args, environ) == -1)
+	    {
+		    perror("Error al ejecutar el comando");
+		    exit(EXIT_FAILURE);
+	    }
     }
     else if (pid > 0)
     {
@@ -37,10 +28,9 @@ void execute_command(char *command)
     else
     {
         perror("fork failed");
-        free(args);
 	exit(EXIT_FAILURE);
     }
 
-    free(args);
+
 }
 
