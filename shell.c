@@ -48,8 +48,14 @@ int main(void)
 		args[i] = NULL;
 
 		if (args[0])
+		{
+			if (strcmp(args[0], "exit") == 0)
+			{
+				free(args);
+				break;
+			}
 			execute_command(args[0], args);
-
+		}
 		free(args);
 	}
 	free(line);
