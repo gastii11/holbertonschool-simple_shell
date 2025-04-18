@@ -17,7 +17,7 @@ void execute_command(char *command, char *args[])
 	{
 		if (execve(command, args, environ) == -1)
 		{
-			perror("./shell");
+			perror("./simple_shell");
 			exit(EXIT_FAILURE);
 		}
 	}

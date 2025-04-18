@@ -10,53 +10,40 @@
 int main(void)
 {
 	char *line = NULL;
-	char **args;
 	size_t len = 0;
 	ssize_t nread;
-	int i = 0;
-	char *token;
+	pid_t pid;
 
 	while (1)
 	{
 		printf("$ ");
+
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
+		{
+			printf("\n");
 			break;
+		}
 
 		line[strcspn(line, "\n")] = 0;
 
-		args = malloc(sizeof(char *));
-		if (!args)
+		pid = fork();
+		if (pid == 0)
 		{
-			perror("malloc failed");
-			exit(EXIT_FAILURE);
-		}
-
-		token = strtok(line, " ");
-		i = 0;
-		while (token)
-		{
-			args = realloc(args, (i + 1) * sizeof(char *));
-			if (!args)
+			if (execve(line, &line, NULL) == -1)
 			{
-				perror("realloc failed");
+				perror("Error:");
 				exit(EXIT_FAILURE);
 			}
-			args[i++] = token;
-			token = strtok(NULL, " ");
 		}
-		args[i] = NULL;
-
-		if (args[0])
+		else if (pid < 0)
 		{
-			if (strcmp(args[0], "exit") == 0)
-			{
-				free(args);
-				break;
-			}
-			execute_command(args[0], args);
+			perror("fork failed");
 		}
-		free(args);
+		else
+		{
+			wait(NULL);
+		}
 	}
 	free(line);
 	return (0);
