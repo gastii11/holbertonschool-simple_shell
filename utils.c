@@ -26,4 +26,3 @@ void exit_shell(void)
 	printf("\nExiting shell...\n");
 	exit(EXIT_SUCCESS);
 }
-
