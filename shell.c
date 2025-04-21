@@ -13,7 +13,6 @@ int main(void)
 	ssize_t nread;
 	int i = 0;
 
-
 	while (1)
 	{
 		printf("$ ");
@@ -21,7 +20,6 @@ int main(void)
 		if (nread == -1)
 			break;
 		line[strcspn(line, "\n")] = 0;
-
 
 		args = malloc(10 * sizeof(char *));
 		if (!args)
