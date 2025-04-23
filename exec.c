@@ -18,7 +18,7 @@ void execute_command(char *command, char *args[])
 	if (strchr(command, '/'))
 	{
 		execve(command, args, environ);
-		perror("./simple_shell");
+		perror("./Thomas_Shellby");
 		exit(EXIT_FAILURE);
 	}
 	path = getenv("PATH");
@@ -36,7 +36,7 @@ void execute_command(char *command, char *args[])
 			if (pid == 0)
 			{
 				execve(full_path, args, environ);
-				perror("./simple_shell");
+				perror("./Thomas_Shellby");
 				exit(EXIT_FAILURE);
 			}
 			else if (pid > 0)
