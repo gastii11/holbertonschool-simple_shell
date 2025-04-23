@@ -21,7 +21,12 @@ int main(void)
 
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
+		{
+			if (interactive)
+				write(STDOUT_FILENO, "\n", 1);
 			break;
+		}
+
 		line[strcspn(line, "\n")] = 0;
 
 		args = malloc(10 * sizeof(char *));
@@ -42,6 +47,13 @@ int main(void)
 			free(args);
 			free(line);
 			exit(0);
+		}
+
+		if (args[0] && strcmp(args[0], "env") == 0)
+		{
+			print_env();
+			free(args);
+			continue;
 		}
 
 		if (args[0])

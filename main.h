@@ -14,7 +14,7 @@ void execute_command(char *command, char *args[]);
 void print_prompt(void);
 void clean_newline(char *str);
 void exit_shell(void);
-
+void print_env(void);
 
 #endif /* EXEC_H */
 
