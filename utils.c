@@ -6,7 +6,7 @@
  */
 void print_prompt(void)
 {
-	printf("$ ");
+	printf("Thomas Shellby $ ");
 }
 
 /**

@@ -12,10 +12,13 @@ int main(void)
 	size_t len = 0;
 	ssize_t nread;
 	int i = 0;
+	int interactive = isatty(STDIN_FILENO);
 
 	while (1)
 	{
-		printf("$ ");
+		if (interactive)
+			write(STDOUT_FILENO, "Thomas Shellby $ ", 17);
+
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 			break;
