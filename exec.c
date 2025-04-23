@@ -29,7 +29,7 @@ void execute_command(char *command, char *args[])
 	token = strtok(path_copy, ":");
 	while (token)
 	{
-		snprintf(full_path, sizeof(full_path), "%s/%s", token, command);
+		sprintf(full_path, "%s/%s", token, command);
 		if (access(full_path, X_OK) == 0)
 		{
 			pid = fork();
