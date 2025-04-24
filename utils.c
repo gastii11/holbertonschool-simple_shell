@@ -31,7 +31,7 @@ void exit_shell(void)
  * print_env - Prints the current environment variables.
  */
 
-void print_env(void)
+void print_env(char *envp[])
 {
 	int i = 0;
 

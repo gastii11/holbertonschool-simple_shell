@@ -6,7 +6,7 @@
  * main - simple shell
  * Return: retorna 0
  */
-int main(int argc __atribute__((unused)), char **argv, char **envp)
+int main(int argc __attribute__((unused)), char **argv __attribute__((unused)), char **envp)
 {
 	char *line = NULL, **args, *token;
 	size_t len = 0;
@@ -51,13 +51,13 @@ int main(int argc __atribute__((unused)), char **argv, char **envp)
 
 		if (args[0] && strcmp(args[0], "env") == 0)
 		{
-			print_env();
+			print_env(envp);
 			free(args);
 			continue;
 		}
 
 		if (args[0])
-			execute_command(args[0], args);
+			execute_command(args[0], args, envp);
 
 		free(args);
 	}

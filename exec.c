@@ -9,7 +9,7 @@
  * @args: Argumentos del comando
  * Return: Void
  */
-void execute_command(char *command, char *args[])
+void execute_command(char *command, char *args[], char *envp[])
 {
 	pid_t pid;
 	int status;
@@ -17,7 +17,7 @@ void execute_command(char *command, char *args[])
 
 	if (strchr(command, '/'))
 	{
-		execve(command, args, environ);
+		execve(command, args, envp);
 		perror("./Thomas_Shellby");
 		exit(EXIT_FAILURE);
 	}
@@ -35,7 +35,7 @@ void execute_command(char *command, char *args[])
 			pid = fork();
 			if (pid == 0)
 			{
-				execve(full_path, args, environ);
+				execve(full_path, args, envp);
 				perror("./Thomas_Shellby");
 				exit(EXIT_FAILURE);
 			}
