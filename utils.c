@@ -35,9 +35,9 @@ void print_env(void)
 {
 	int i = 0;
 
-	while (environ[i])
+	while (envp[i])
 	{
-		printf("%s\n", environ[i]);
+		printf("%s\n", envp[i]);
 		i++;
 	}
 }
