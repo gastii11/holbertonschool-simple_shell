@@ -6,7 +6,7 @@
  * main - simple shell
  * Return: retorna 0
  */
-int main(void)
+int main(int argc __atribute__((unused)), char **argv, char **envp)
 {
 	char *line = NULL, **args, *token;
 	size_t len = 0;
