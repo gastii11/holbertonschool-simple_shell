@@ -23,7 +23,6 @@ void clean_newline(char *str)
  */
 void exit_shell(void)
 {
-	printf("\nExiting shell...\n");
 	exit(EXIT_SUCCESS);
 }
 

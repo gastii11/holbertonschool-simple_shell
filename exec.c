@@ -15,6 +15,11 @@ void execute_command(char *command, char *args[], char *envp[])
 	int status;
 	char *path, *path_copy, *token, full_path[256];
 
+	if (strcmp(command, "exit") == 0)
+	{
+		exit_shell();
+		return;
+	}
 	if (strchr(command, '/'))
 	{
 		execve(command, args, envp);

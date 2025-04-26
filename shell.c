@@ -42,13 +42,6 @@ int main(int argc __attribute__((unused)), char **argv __attribute__((unused)), 
 		}
 		args[i] = NULL;
 
-		if (args[0] && strcmp(args[0], "exit") == 0)
-		{
-			free(args);
-			free(line);
-			exit(0);
-		}
-
 		if (args[0] && strcmp(args[0], "env") == 0)
 		{
 			print_env(envp);
