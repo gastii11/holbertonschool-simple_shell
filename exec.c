@@ -3,58 +3,110 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+
 /**
- * execute_command - Busca y ejecuta un comando en el sistema
- * @command: Comando ingresado por el usuario
+ * execute_command - Ejecuta un comando en el sistema
+ * @cmd: Comando ingresado por el usuario
  * @args: Argumentos del comando
- * Return: Void
+ * @envp: Variables de entorno
  */
-void execute_command(char *command, char *args[], char *envp[])
+void execute_command(char *cmd, char *args[], char *envp[])
 {
 	pid_t pid;
 	int status;
-	char *path, *path_copy, *token, full_path[256];
+	char *path, *p_copy, *token, full_path[256];
 
-	if (strcmp(command, "exit") == 0)
+	if (!strcmp(cmd, "exit"))
 	{
 		exit_shell();
 		return;
 	}
-	if (strchr(command, '/'))
+	if (strchr(cmd, '/'))
 	{
-		execve(command, args, envp);
-		perror("./Thomas_Shellby");
+		execve(cmd, args, envp), perror("./Thomas_Shellby");
 		exit(EXIT_FAILURE);
 	}
 	path = get_path(envp);
 	if (!path)
 		return;
 
-	path_copy = malloc(strlen(path) + 1);
-	if (!path_copy)
+	p_copy = malloc(strlen(path) + 1);
+	if (!p_copy)
 		return;
-	strcpy(path_copy, path);
-	token = strtok(path_copy, ":");
+	strcpy(p_copy, path);
+	token = strtok(p_copy, ":");
 	while (token)
 	{
-		sprintf(full_path, "%s/%s", token, command);
-		if (access(full_path, X_OK) == 0)
+		sprintf(full_path, "%s/%s", token, cmd);
+		if (!access(full_path, X_OK))
 		{
 			pid = fork();
-			if (pid == 0)
-			{
-				execve(full_path, args, envp);
-				perror("./Thomas_Shellby");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid > 0)
-				wait(&status);
-
-			free(path_copy);
+			if (!pid)
+				execve(full_path, args, envp), perror("./Thomas_Shellby")
+					exit(EXIT_FAILURE);
+			wait(&status), free(p_copy);
 			return;
 		}
 		token = strtok(NULL, ":");
 	}
-	free(path_copy);
-	fprintf(stderr, "%s: comando no encontrado\n", command);
+	free(p_copy), fprintf(stderr, "%s: comando no encontrado\n", cmd);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
