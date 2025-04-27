@@ -12,6 +12,6 @@ void print_prompt(void);
 void clean_newline(char *str);
 void exit_shell(void);
 void print_env(char *envp[]);
-
+char *get_path(char **envp);
 #endif /* EXEC_H */
 

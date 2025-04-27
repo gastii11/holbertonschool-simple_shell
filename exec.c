@@ -26,11 +26,14 @@ void execute_command(char *command, char *args[], char *envp[])
 		perror("./Thomas_Shellby");
 		exit(EXIT_FAILURE);
 	}
-	path = getenv("PATH");
+	path = get_path(envp);
 	if (!path)
 		return;
 
-	path_copy = strdup(path);
+	path_copy = malloc(strlen(path) + 1);
+	if (!path_copy)
+		return;
+	strcpy(path_copy, path);
 	token = strtok(path_copy, ":");
 	while (token)
 	{
