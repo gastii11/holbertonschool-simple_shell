@@ -42,7 +42,7 @@ void execute_command(char *cmd, char *args[], char *envp[])
 		{
 			pid = fork();
 			if (!pid)
-				execve(full_path, args, envp), perror("./Thomas_Shellby")
+				execve(full_path, args, envp), perror("./Thomas_Shellby");
 					exit(EXIT_FAILURE);
 			wait(&status), free(p_copy);
 			return;
